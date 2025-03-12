@@ -1,0 +1,25 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Flask",
+            "type": "python",
+            "request": "launch",
+            "module": "flask",
+            "env": {
+                "FLASK_APP": "app:create_app", // VERY important for our structure
+                "FLASK_DEBUG": "1"
+            },
+            "args": [
+                "run",
+                "--no-debugger", // We'll use VS Code's debugger
+                "--no-reload"    // Important when using asyncio
+            ],
+            "jinja": true, // Enable Jinja template debugging (if you use templates)
+            "justMyCode": true
+        }
+    ]
+}
