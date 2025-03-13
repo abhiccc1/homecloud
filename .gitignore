@@ -173,3 +173,7 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+#Experimental & local Setup files
+requirements.txt
+generate_changelog.py

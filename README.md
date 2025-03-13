@@ -4,12 +4,13 @@ HomeCloud is a Flask-based web application that allows users to upload, list, an
 
 ## Features
 
-- Upload photos via a web interface or Telegram bot
-- Generate and store thumbnails for uploaded photos
-- List uploaded photos with metadata
-- Download photos and thumbnails
-- Integration with PostgreSQL for storing photo metadata
-- Docker support for easy deployment
+- Upload photos via a web interface or Telegram bot.
+- Generate and store thumbnails for uploaded photos.
+- List uploaded photos with metadata.
+- Download photos and thumbnails.
+- Integration with PostgreSQL for storing photo metadata.
+- Docker support for easy deployment.
+- Hot-reloading in development for faster iteration.
 
 ## Setup
 
@@ -28,7 +29,7 @@ HomeCloud is a Flask-based web application that allows users to upload, list, an
     cd homecloud
     ```
 
-2. Create a virtual environment and activate it:
+2. (For Local Development) Create a virtual environment and activate it:
 
     ```sh
     python -m venv venv
@@ -38,15 +39,22 @@ HomeCloud is a Flask-based web application that allows users to upload, list, an
 3. Install the dependencies:
 
     ```sh
-    pip install -r requirements.txt
+    pip install .
     ```
 
-4. Create a `.env` file and set the following environment variables:
-
+4. Create a `.env` root file and set the following environment variables:
     ```env
-    DATABASE_URL=your_database_url
-    BOT_TOKEN=your_telegram_bot_token
-    CHAT_ID=your_telegram_chat_id
+    API_ID=<Telegram API_ID>
+    API_HASH=<Telegram API_HASH>
+    PHONE_NUMBER=<Telegram PHONE_NUMBER>
+    BOT_TOKEN=<Telegram PHONE_NUMBER>
+    CHAT_ID=<Telegram CHAT_ID>
+    DATABASE_URL=DATABASE_URL=postgresql://your_postgres_user:your_postgres_password@localhost:5432/your_postgres_db
+    DATABASE_ENCRYPTION_KEY=<Secure Encryption Key>
+    TDLIB_FILES_DIRECTORY=<tdlib_data Directory Path>
+    APP_PORT=<Default 5000>
+    
+    # for pgadmin
     POSTGRES_USER=your_postgres_user
     POSTGRES_PASSWORD=your_postgres_password
     POSTGRES_DB=your_postgres_db
@@ -54,27 +62,32 @@ HomeCloud is a Flask-based web application that allows users to upload, list, an
     PGADMIN_DEFAULT_PASSWORD=your_pgadmin_password
     ```
 
-5. Start the Docker containers:
+### Running the Application
+
+1.  Run with Docker (Recommended)
 
     ```sh
-    docker-compose up -d
+    docker-compose up -d --build
     ```
 
-6. Initialize the database (if needed):
+    Check Logs:
+    ```sh
+    docker-compose logs -f web
+    ```
 
+(2) Run Locally (Without Docker)
+
+    Initialize the database (if needed):
     ```sh
     flask db upgrade
     ```
 
-### Running the Application
-
-1. Run the Flask application:
-
+    Start the Flask app:
     ```sh
     python run.py
     ```
 
-2. Access the application at `http://localhost:8888`.
+2. Access the application at `http://localhost:5000`. Use same port as defined by APP_PORT in .env
 
 ### Running the Telegram Bot
 
